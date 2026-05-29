@@ -1,0 +1,54 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "nfg": "https://nfg.ngraph.jp/schema/v0.2/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "SeafoodRestaurant": "nfg:SeafoodRestaurant",
+    "CocktailBar": "nfg:CocktailBar",
+    "KappoRestaurant": "nfg:KappoRestaurant",
+    "Dish": "nfg:Dish",
+    "Ingredient": "nfg:Ingredient",
+
+    "confidenceScore": {
+      "@id": "nfg:confidenceScore",
+      "@type": "xsd:decimal"
+    },
+    "culturalContext": {
+      "@id": "nfg:culturalContext"
+    },
+    "cookingMethods": {
+      "@id": "nfg:cookingMethods",
+      "@container": "@set"
+    },
+    "dishCategory": {
+      "@id": "nfg:dishCategory"
+    },
+    "mainIngredients": {
+      "@id": "nfg:mainIngredients",
+      "@container": "@set"
+    },
+    "provenance": {
+      "@id": "nfg:provenance"
+    },
+    "scientificName": {
+      "@id": "nfg:scientificName"
+    },
+    "seasonStart": {
+      "@id": "nfg:seasonStart",
+      "@type": "xsd:date"
+    },
+    "seasonEnd": {
+      "@id": "nfg:seasonEnd",
+      "@type": "xsd:date"
+    },
+    "vadCertified": {
+      "@id": "nfg:vadCertified",
+      "@type": "xsd:boolean"
+    },
+    "vadSource": {
+      "@id": "nfg:vadSource"
+    }
+  }
+}
