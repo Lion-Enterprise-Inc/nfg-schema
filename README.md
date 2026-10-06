@@ -1,4 +1,4 @@
-# NFG — Nicomacos Food Graph Schema
+# NFG — Nicomachos Food Graph Schema
 
 Open vocabulary for restaurant, dish, ingredient, and food data. Provided by **NGraph Inc.**, powering [OMISEAI](https://omiseai.com/).
 
