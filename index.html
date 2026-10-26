@@ -22,10 +22,12 @@ header{display:flex;justify-content:space-between;align-items:center;padding:20p
 header .logo{font-family:var(--m);font-size:1.25rem;letter-spacing:.06em;text-decoration:none}
 header .logo small{font-family:var(--g);font-size:.75rem;color:var(--t3);margin-left:10px;letter-spacing:.04em}
 header .lang{color:var(--accent);font-weight:700;text-decoration:none}
-.hero{background:#0b0b0d;color:#f3efe6;padding:96px 0 104px}
-.hero .k{font-size:.8125rem;letter-spacing:.14em;color:var(--hot);margin-bottom:22px}
+.hero{background:#fff;color:var(--ink);padding:72px 0 40px;border-bottom:1px solid var(--line)}
+.hero .k{font-size:.8125rem;letter-spacing:.14em;color:var(--hot-ink);font-weight:700;margin-bottom:22px}
 .hero h1{font-family:var(--m);font-weight:400;font-size:clamp(2.1rem,5vw,4rem);line-height:1.4;letter-spacing:.04em}
-.hero p{margin-top:28px;max-width:40em;color:rgba(243,239,230,.78);font-size:1rem}
+.hero p{margin-top:24px;max-width:40em;color:var(--t2);font-size:1rem}
+.hero-fig{margin:40px auto 0;max-width:920px}
+.hero-fig img{display:block;width:100%;height:auto}
 section{padding:104px 0}
 section.alt{background:var(--bg-2)}
 h2{font-size:clamp(1.875rem,4vw,3rem);line-height:1.4;font-weight:700;letter-spacing:.01em}
@@ -46,7 +48,7 @@ h2{font-size:clamp(1.875rem,4vw,3rem);line-height:1.4;font-weight:700;letter-spa
 .flow li.on{border:2px solid var(--accent)}
 .flow li.on .n{color:var(--hot-ink)}
 .loopback{margin:18px 12% 0;border:2px dashed var(--accent);border-top:none;height:30px;border-radius:0 0 12px 12px;position:relative}
-.loopback span{position:absolute;left:50%;bottom:-12px;transform:translateX(-50%);background:var(--bg-2);padding:0 12px;font-size:.875rem;color:var(--accent);font-weight:700;white-space:nowrap}
+.loopback span{position:absolute;left:50%;bottom:-12px;transform:translateX(-50%);background:var(--bg);padding:0 12px;font-size:.875rem;color:var(--accent);font-weight:700;white-space:nowrap}
 .trust{margin-top:44px;border-top:1px solid var(--ink)}
 .trust .row{display:grid;grid-template-columns:200px 220px minmax(0,1fr);gap:20px;padding:18px 4px;border-bottom:1px solid var(--line);align-items:baseline}
 .trust code{font-family:ui-monospace,Consolas,monospace;font-size:.875rem;color:var(--t3)}
@@ -78,10 +80,32 @@ h2{font-size:clamp(1.875rem,4vw,3rem);line-height:1.4;font-weight:700;letter-spa
 .dev .types{display:flex;flex-wrap:wrap;gap:8px}
 .dev .types code{display:inline-block}
 .dev .types em{font-style:normal;font-size:.75rem;color:var(--hot-ink);font-weight:700}
+.pos{margin-top:48px;display:grid;grid-template-columns:minmax(0,5fr) 150px auto minmax(0,4fr);gap:20px 24px;align-items:center}
+.pos-cmp{grid-column:1/-1;display:flex;align-items:center;gap:16px;margin-bottom:12px}
+.pos-cmp div{border:1px solid var(--line);border-radius:10px;padding:12px 18px;background:#fff;min-width:200px}
+.pos-cmp div.on{border:2px solid var(--accent)}
+.pos-cmp span{display:block;font-size:.8125rem;color:var(--t3)}
+.pos-cmp b{font-size:1.125rem}
+.pos-cmp div.on b{color:var(--accent)}
+.pos-cmp em{font-style:normal;color:var(--t3);font-weight:700}
+.pos ul{list-style:none;display:grid;gap:10px}
+.pos-in{grid-template-columns:1fr 1fr}
+.pos li{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;grid-template-columns:32px minmax(0,1fr);gap:4px 12px;align-items:center}
+.pos li i{grid-row:1/3;width:32px;height:32px;color:var(--accent)}
+.pos li svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.pos li b{font-size:.9375rem;line-height:1.5}
+.pos li small{font-size:.8125rem;color:var(--hot-ink);font-weight:700;white-space:nowrap}
+.pos-out li i{grid-row:auto}
+.pos-core{width:150px;height:150px;border-radius:50%;border:3px solid var(--accent);background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative}
+.pos-core::before{content:"→";position:absolute;left:-22px;color:var(--accent);font-weight:700}
+.pos-core strong{font-size:2rem;color:var(--accent);letter-spacing:.04em;line-height:1}
+.pos-core span{font-size:.8125rem;color:var(--t2);margin-top:6px;padding:0 10px;line-height:1.4}
+.pos-ref{font-size:.8125rem;font-weight:700;color:var(--hot-ink);white-space:nowrap}
+@media(max-width:860px){.pos{grid-template-columns:1fr}.pos-cmp{flex-wrap:wrap}.pos-cmp div{min-width:0;flex:1}.pos-core{justify-self:center}.pos-core::before{content:"↓";left:50%;top:-24px;transform:translateX(-50%)}.pos-ref{text-align:center}.pos-ref span{display:none}.pos-ref::after{content:" ↓"}}
 footer{background:#0b0b0d;color:rgba(243,239,230,.7);padding:40px 0;font-size:.875rem}
 footer a{color:#f3efe6}
 @media(max-width:860px){
-  section{padding:72px 0}.hero{padding:64px 0 72px}
+  section{padding:72px 0}.hero{padding:48px 0 24px}.hero-fig{margin-top:28px}
   .two-col,.impl{grid-template-columns:1fr;gap:32px}
   .flow{grid-template-columns:1fr;gap:22px}
   .flow li+li::before{left:50%;top:-16px;transform:translateX(-50%) rotate(135deg)}
@@ -100,6 +124,7 @@ footer a{color:#f3efe6}
   <p class="k">Nicomachos Food Graph　v0.3</p>
   <h1><span class="nb">料理の情報を、</span><span class="nb">AIが間違えずに</span><span class="nb">答えられる形に。</span></h1>
   <p>NFG は、料理・食材・アレルゲンの情報を「店主が確かめた正解データ」として持つための、食のオープンな規格です。株式会社NGraph が策定し、OMISEAI で実装しています。</p>
+  <figure class="hero-fig"><img src="/img/hero-pork-or-chicken.png" alt="串カツを前に、豚と鶏が「Pork or Chicken?（豚？鶏？）」と考えている絵。見た目だけでは中身が分からない" width="1600" height="819"></figure>
 </div></div>
 
 <section><div class="wrap two-col why">
@@ -112,13 +137,19 @@ footer a{color:#f3efe6}
 </div></section>
 
 <section class="alt"><div class="wrap">
+  <h2><span class="nb">小売にはJANコード。</span><span class="nb">外食にも、同じ共通の形を。</span></h2>
+  <p class="sub">店主が確かめた料理の情報を集めて構造にし、AIが参照できる食の標準をめざしています。</p>
+  <div class="pos"><ul class="pos-in"><li><i><svg viewBox="0 0 32 32"><rect x="7" y="4" width="18" height="24" rx="2"/><path d="M11 11h10M11 16h10M11 21h6"/></svg></i><b>メニュー</b><small>✓ 店主確認済み</small></li><li><i><svg viewBox="0 0 32 32"><path d="M5 23h22"/><path d="M7 23a9 9 0 0 1 18 0"/><path d="M16 11V8M14 8h4"/></svg></i><b>料理</b><small>✓ 店主確認済み</small></li><li><i><svg viewBox="0 0 32 32"><path d="M8 25C8 13 14 7 26 6c0 12-6 19-18 19z"/><path d="M8 25l10-10"/></svg></i><b>材料・アレルゲン</b><small>✓ 店主確認済み</small></li><li><i><svg viewBox="0 0 32 32"><path d="M5 13l3-7h16l3 7"/><path d="M6 13v14h20V13"/><path d="M13 27v-7h6v7"/></svg></i><b>店舗</b><small>✓ 店主確認済み</small></li></ul><div class="pos-core"><strong>NFG</strong><span>食の構造化規格</span></div><p class="pos-ref">AIが参照<span> →</span></p><ul class="pos-out"><li><i><svg viewBox="0 0 32 32"><rect x="6" y="8" width="20" height="14" rx="4"/><path d="M12 22l-2 5 6-5"/><circle cx="12" cy="15" r="1.2"/><circle cx="20" cy="15" r="1.2"/></svg></i><b>生成AI・チャット</b></li><li><i><svg viewBox="0 0 32 32"><circle cx="14" cy="14" r="8"/><path d="M20 20l7 7"/></svg></i><b>検索・回答エンジン</b></li><li><i><svg viewBox="0 0 32 32"><path d="M16 27s-10-6-10-13a5 5 0 0 1 10-2 5 5 0 0 1 10 2c0 7-10 13-10 13z"/></svg></i><b>おすすめ</b></li><li><i><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="11"/><path d="M5 16h22M16 5c4 4 4 18 0 22M16 5c-4 4-4 18 0 22"/></svg></i><b>多言語・海外向けサービス</b></li></ul></div>
+</div></section>
+
+<section><div class="wrap">
   <h2><span class="nb">AIが下書きし、</span><span class="nb">人が確かめる。</span></h2>
   <p class="sub">この仕組みを HITL（Human-in-the-loop）と呼びます。</p>
   <ol class="flow"><li><span class="n">01</span><b>AIが下書きする</b><small>メニューの写真や文章から、材料・調理法・アレルゲンを推定する</small></li><li><span class="n">02</span><b>店主が確かめる</b><small>違うところを直し、正しいものを承認する</small></li><li class="on"><span class="n">03</span><b>正解データになる</b><small>店主確認済み（owner_verified）・確かさ 0.95 以上</small></li><li><span class="n">04</span><b>AIが答える</b><small>確かめた情報だけで答え、「店舗確認済み」と示す</small></li></ol>
   <div class="loopback"><span>分からないことは、店主への質問として戻す</span></div>
 </div></section>
 
-<section><div class="wrap">
+<section class="alt"><div class="wrap">
   <h2><span class="nb">情報には、</span><span class="nb">出どころを付ける。</span></h2>
   <p class="sub">料理の情報ひとつひとつに、どこから来たか（vadSource）と、確かさ（confidenceScore 0.0〜1.0）を付けます。</p>
   <div class="trust"><div class="row"><code>ai_inferred</code><b>AIの推測</b><span>写真や文章からの推定。答えには使わず、店主への確認に回す</span></div><div class="row"><code>third_party</code><b>第三者の情報</b><span>口コミ・ガイドブックなど</span></div><div class="row"><code>official_published</code><b>公式に公開された情報</b><span>店のサイト・公式メニュー</span></div><div class="row top"><code>owner_verified</code><b>店主確認済み（VAD）</b><span>店主が確かめた正解データ。AIが答えに使う</span></div></div>
@@ -126,7 +157,7 @@ footer a{color:#f3efe6}
   <p class="note"><strong>機械が読む構造と、人が読む物語。</strong>　どちらも同じように出どころと確かさを持ちます。片方だけでは、料理を説明したことになりません。</p>
 </div></section>
 
-<section class="alt"><div class="wrap impl">
+<section><div class="wrap impl">
   <div>
     <h2><span class="nb">この規格を、</span><span class="nb">お店で動く形にしたのが</span><span class="nb">OMISEAI。</span></h2>
     <p>料理ごとのカードに、確かめた情報だけを持ち、海外のお客さまの言葉で答えます。福井・金沢の実店舗で本番運用中です。</p>
@@ -136,7 +167,7 @@ footer a{color:#f3efe6}
   <figure><img src="/img/omiseai-card.jpg" alt="OMISEAI の料理カード。店主が確かめた情報で答えている画面" loading="lazy"></figure>
 </div></section>
 
-<section class="dev"><div class="wrap">
+<section class="dev alt"><div class="wrap">
   <h2>技術者の方へ</h2>
   <p class="sub">schema.org を拡張する JSON-LD の語彙として使えます。</p>
   <dl>
