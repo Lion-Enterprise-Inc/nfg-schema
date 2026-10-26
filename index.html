@@ -2,74 +2,175 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>NFG — Nicomachos Food Graph Schema</title>
-<meta name="description" content="NFG (Nicomachos Food Graph) is an open vocabulary for restaurant, dish, and food data. Provided by NGraph Inc.">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NFG — 料理の情報を、AIが間違えずに答えられる形に｜Nicomachos Food Graph</title>
+<meta name="description" content="NFG（Nicomachos Food Graph）は、料理・食材・アレルゲンの情報を、店主が確かめた正解データとして持つための、食のオープンな規格です。株式会社NGraphが策定し、OMISEAIで実装しています。">
+<link rel="alternate" hreflang="ja" href="https://nfg.ngraph.jp/">
+<link rel="alternate" hreflang="en" href="https://nfg.ngraph.jp/en/">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', sans-serif; max-width: 720px; margin: 40px auto; padding: 0 20px; line-height: 1.7; color: #1a1a1a; }
-  code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-size: 0.92em; }
-  pre { background: #f4f4f4; padding: 16px; border-radius: 6px; overflow-x: auto; font-size: 13px; }
-  h1 { border-bottom: 2px solid #1a1a1a; padding-bottom: 8px; }
-  h2 { margin-top: 32px; }
-  a { color: #2563eb; text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  .ver { display: inline-block; background: #1a1a1a; color: #fff; padding: 2px 10px; border-radius: 12px; font-size: 12px; }
+:root{--bg:#f5f6f7;--bg-2:#eceef1;--ink:#16202c;--t2:#46505c;--t3:#646d78;--line:rgba(22,32,44,.14);--accent:#24427a;--hot:#c8a24a;--hot-ink:#8a6a1e;--g:'Zen Kaku Gothic New','Noto Sans JP',sans-serif;--m:'Zen Old Mincho','Noto Serif JP',serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--g);background:var(--bg);color:var(--ink);font-size:16px;line-height:1.9;-webkit-font-smoothing:antialiased;word-break:auto-phrase}
+.nb{display:inline-block;word-break:auto-phrase;line-break:strict;overflow-wrap:anywhere}
+a{color:inherit}
+button,input{font-family:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+header{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;max-width:1080px;margin:0 auto;font-size:.875rem}
+header .logo{font-family:var(--m);font-size:1.25rem;letter-spacing:.06em;text-decoration:none}
+header .logo small{font-family:var(--g);font-size:.75rem;color:var(--t3);margin-left:10px;letter-spacing:.04em}
+header .lang{color:var(--accent);font-weight:700;text-decoration:none}
+.hero{background:#0b0b0d;color:#f3efe6;padding:96px 0 104px}
+.hero .k{font-size:.8125rem;letter-spacing:.14em;color:var(--hot);margin-bottom:22px}
+.hero h1{font-family:var(--m);font-weight:400;font-size:clamp(2.1rem,5vw,4rem);line-height:1.4;letter-spacing:.04em}
+.hero p{margin-top:28px;max-width:40em;color:rgba(243,239,230,.78);font-size:1rem}
+section{padding:104px 0}
+section.alt{background:var(--bg-2)}
+h2{font-size:clamp(1.875rem,4vw,3rem);line-height:1.4;font-weight:700;letter-spacing:.01em}
+.sub{margin-top:14px;color:var(--t3);font-size:.875rem}
+.two-col{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
+.why p{margin-top:12px;color:var(--t2)}
+.why p.strong{color:var(--ink);font-weight:700;font-size:1.125rem;margin-top:22px}
+.vad{border:2px solid var(--accent);border-radius:12px;padding:36px 32px;background:#fff;text-align:center}
+.vad b{display:block;font-size:3.5rem;line-height:1;color:var(--accent);letter-spacing:.06em}
+.vad i{display:block;font-style:normal;margin-top:10px;font-size:.875rem;color:var(--t3);letter-spacing:.08em}
+.vad span{display:block;margin-top:14px;font-size:1.25rem;font-weight:700}
+.flow{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:48px;counter-reset:s}
+.flow li{background:#fff;border:1px solid var(--line);border-radius:10px;padding:24px 20px;position:relative}
+.flow li+li::before{content:"";position:absolute;left:-14px;top:50%;width:10px;height:10px;border-top:2px solid var(--accent);border-right:2px solid var(--accent);transform:translateY(-50%) rotate(45deg)}
+.flow .n{font-size:.8125rem;font-weight:700;color:var(--t3);letter-spacing:.1em}
+.flow b{display:block;font-size:1.125rem;margin:8px 0 8px}
+.flow small{display:block;font-size:.875rem;color:var(--t2);line-height:1.8}
+.flow li.on{border:2px solid var(--accent)}
+.flow li.on .n{color:var(--hot-ink)}
+.loopback{margin:18px 12% 0;border:2px dashed var(--accent);border-top:none;height:30px;border-radius:0 0 12px 12px;position:relative}
+.loopback span{position:absolute;left:50%;bottom:-12px;transform:translateX(-50%);background:var(--bg-2);padding:0 12px;font-size:.875rem;color:var(--accent);font-weight:700;white-space:nowrap}
+.trust{margin-top:44px;border-top:1px solid var(--ink)}
+.trust .row{display:grid;grid-template-columns:200px 220px minmax(0,1fr);gap:20px;padding:18px 4px;border-bottom:1px solid var(--line);align-items:baseline}
+.trust code{font-family:ui-monospace,Consolas,monospace;font-size:.875rem;color:var(--t3)}
+.trust b{font-size:1.125rem}
+.trust span{color:var(--t2);font-size:.875rem}
+.trust .row.top{background:#fff}
+.trust .row.top b{color:var(--accent)}
+.trust .row.top code{color:var(--hot-ink);font-weight:700}
+.layers{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:40px}
+.layers div{background:#fff;border:1px solid var(--line);border-radius:10px;padding:28px}
+.layers b{font-size:1.5rem}
+.layers p{margin-top:8px;color:var(--t2)}
+.note{margin-top:20px;font-size:.875rem;color:var(--t3)}
+.impl{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:56px;align-items:center}
+.impl p{margin-top:20px;color:var(--t2)}
+.impl p.more{font-size:.875rem;color:var(--t3)}
+.impl a.btn{display:inline-block;margin-top:28px;background:var(--hot);color:var(--ink);font-weight:700;padding:16px 28px;border-radius:4px;text-decoration:none}
+.impl figure{background:#fff;border-radius:16px;padding:24px;border:1px solid var(--line);text-align:center}
+.impl img{max-width:280px;width:100%;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.12)}
+.dev dl{margin-top:40px;display:grid;grid-template-columns:200px minmax(0,1fr);gap:14px 24px;align-items:start}
+.dev dt{font-weight:700;font-size:.875rem;color:var(--t3);padding-top:2px}
+.dev dd code,.dev pre{font-family:ui-monospace,Consolas,monospace;font-size:.875rem}
+.dev dd code{background:#fff;border:1px solid var(--line);padding:2px 8px;border-radius:4px;word-break:break-all}
+.dev pre{background:#16202c;color:#e8ecf2;padding:20px;border-radius:10px;overflow-x:auto;line-height:1.6}
+.dev ul{list-style:none}
+.dev li{padding:6px 0;border-bottom:1px solid var(--line);font-size:.9375rem;display:grid;grid-template-columns:190px minmax(0,1fr);gap:12px}
+.dev li code{background:none;border:none;padding:0;color:var(--accent);font-weight:700}
+.dev li em{font-style:normal;font-size:.75rem;color:var(--hot-ink);font-weight:700;margin-left:8px}
+.dev .types{display:flex;flex-wrap:wrap;gap:8px}
+.dev .types code{display:inline-block}
+.dev .types em{font-style:normal;font-size:.75rem;color:var(--hot-ink);font-weight:700}
+footer{background:#0b0b0d;color:rgba(243,239,230,.7);padding:40px 0;font-size:.875rem}
+footer a{color:#f3efe6}
+@media(max-width:860px){
+  section{padding:72px 0}.hero{padding:64px 0 72px}
+  .two-col,.impl{grid-template-columns:1fr;gap:32px}
+  .flow{grid-template-columns:1fr;gap:22px}
+  .flow li+li::before{left:50%;top:-16px;transform:translateX(-50%) rotate(135deg)}
+  .loopback{margin:16px 0 0;border:none;height:auto;text-align:center}.loopback span{position:static;transform:none;background:none;padding:0}.loopback span::before{content:"↺ "}
+  .trust .row{grid-template-columns:1fr;gap:4px}
+  .layers{grid-template-columns:1fr}
+  .dev dl{grid-template-columns:1fr;gap:6px}.dev dd{margin-bottom:14px}
+  .dev li{grid-template-columns:1fr;gap:2px}
+}
 </style>
 </head>
 <body>
+<header><a class="logo" href="/">NFG<small>Nicomachos Food Graph</small></a><a class="lang" href="/en/">English</a></header>
 
-<h1>NFG <span class="ver">v0.2</span></h1>
-<p><strong>Nicomachos Food Graph</strong> — An open vocabulary for restaurant, dish, ingredient, and food provenance data. Extends Schema.org for the food / hospitality domain.</p>
+<div class="hero"><div class="wrap">
+  <p class="k">Nicomachos Food Graph　v0.3</p>
+  <h1><span class="nb">料理の情報を、</span><span class="nb">AIが間違えずに</span><span class="nb">答えられる形に。</span></h1>
+  <p>NFG は、料理・食材・アレルゲンの情報を「店主が確かめた正解データ」として持つための、食のオープンな規格です。株式会社NGraph が策定し、OMISEAI で実装しています。</p>
+</div></div>
 
-<h2>Namespace</h2>
-<p><code>https://nfg.ngraph.jp/schema/v0.2/</code></p>
+<section><div class="wrap two-col why">
+  <div>
+    <h2><span class="nb">AIは、料理を</span><span class="nb">推測で答えてしまう。</span></h2>
+    <p>AIは、材料やアレルゲンを、それらしく推測して答えます。</p><p>飲食店では、その一言が事故になります。</p>
+    <p class="strong">NFG は、店主が確かめた情報を正解データ（VAD）として持ち、AIはそれだけで答えます。</p>
+  </div>
+  <div class="vad"><b>VAD</b><i>Verified Authentic Data</i><span>店主が確かめた、正解データ</span></div>
+</div></section>
 
-<h2>JSON-LD Context</h2>
-<p><a href="/schema/v0.2/context.jsonld">/schema/v0.2/context.jsonld</a></p>
-<p>Use this URL inside the <code>@context</code> array of your JSON-LD payload alongside <code>https://schema.org</code>:</p>
-<pre>{
+<section class="alt"><div class="wrap">
+  <h2><span class="nb">AIが下書きし、</span><span class="nb">人が確かめる。</span></h2>
+  <p class="sub">この仕組みを HITL（Human-in-the-loop）と呼びます。</p>
+  <ol class="flow"><li><span class="n">01</span><b>AIが下書きする</b><small>メニューの写真や文章から、材料・調理法・アレルゲンを推定する</small></li><li><span class="n">02</span><b>店主が確かめる</b><small>違うところを直し、正しいものを承認する</small></li><li class="on"><span class="n">03</span><b>正解データになる</b><small>店主確認済み（owner_verified）・確かさ 0.95 以上</small></li><li><span class="n">04</span><b>AIが答える</b><small>確かめた情報だけで答え、「店舗確認済み」と示す</small></li></ol>
+  <div class="loopback"><span>分からないことは、店主への質問として戻す</span></div>
+</div></section>
+
+<section><div class="wrap">
+  <h2><span class="nb">情報には、</span><span class="nb">出どころを付ける。</span></h2>
+  <p class="sub">料理の情報ひとつひとつに、どこから来たか（vadSource）と、確かさ（confidenceScore 0.0〜1.0）を付けます。</p>
+  <div class="trust"><div class="row"><code>ai_inferred</code><b>AIの推測</b><span>写真や文章からの推定。答えには使わず、店主への確認に回す</span></div><div class="row"><code>third_party</code><b>第三者の情報</b><span>口コミ・ガイドブックなど</span></div><div class="row"><code>official_published</code><b>公式に公開された情報</b><span>店のサイト・公式メニュー</span></div><div class="row top"><code>owner_verified</code><b>店主確認済み（VAD）</b><span>店主が確かめた正解データ。AIが答えに使う</span></div></div>
+  <div class="layers"><div><b>構造</b><p>材料・調理法・アレルゲン・食事の制約（5か国の表示規制）</p></div><div><b>物語</b><p>味わい・食べ方・合う飲み物・料理の背景</p></div></div>
+  <p class="note"><strong>機械が読む構造と、人が読む物語。</strong>　どちらも同じように出どころと確かさを持ちます。片方だけでは、料理を説明したことになりません。</p>
+</div></section>
+
+<section class="alt"><div class="wrap impl">
+  <div>
+    <h2><span class="nb">この規格を、</span><span class="nb">お店で動く形にしたのが</span><span class="nb">OMISEAI。</span></h2>
+    <p>料理ごとのカードに、確かめた情報だけを持ち、海外のお客さまの言葉で答えます。福井・金沢の実店舗で本番運用中です。</p>
+    <p class="more">同じ料理・食材の辞書で、飲食店のホームページを英語・中国語・韓国語にしています（店ごとに訳がぶれない）。</p>
+    <a class="btn" href="https://omiseai.com/" target="_blank" rel="noopener">omiseai.com を見る →</a>
+  </div>
+  <figure><img src="/img/omiseai-card.jpg" alt="OMISEAI の料理カード。店主が確かめた情報で答えている画面" loading="lazy"></figure>
+</div></section>
+
+<section class="dev"><div class="wrap">
+  <h2>技術者の方へ</h2>
+  <p class="sub">schema.org を拡張する JSON-LD の語彙として使えます。</p>
+  <dl>
+    <dt>名前空間</dt><dd><code>https://nfg.ngraph.jp/schema/v0.3/</code></dd>
+    <dt>JSON-LD context</dt><dd><a href="/schema/v0.3/context.jsonld"><code>/schema/v0.3/context.jsonld</code></a><br><span class="note">v0.2：<a href="/schema/v0.2/context.jsonld"><code>/schema/v0.2/context.jsonld</code></a></span></dd>
+    <dt>例（架空の店）</dt><dd><pre>{
   "@context": [
     "https://schema.org",
-    "https://nfg.ngraph.jp/schema/v0.2/context.jsonld"
+    "https://nfg.ngraph.jp/schema/v0.3/context.jsonld"
   ],
-  "@type": [ "Restaurant", "nfg:SeafoodRestaurant" ],
-  "name": "蟹と海鮮ぼんた",
-  "nfg:vadCertified": true,
-  "nfg:vadSource": "owner_verified",
-  "nfg:confidenceScore": 0.95
-}</pre>
+  "@type": ["Restaurant", "nfg:SeafoodRestaurant"],
+  "name": "Sakanaya (fictional)",
+  "hasMenu": {
+    "@type": "Menu",
+    "hasMenuItem": [{
+      "@type": ["MenuItem", "nfg:Dish"],
+      "name": "Boiled snow crab",
+      "nfg:mainIngredients": ["snow crab"],
+      "nfg:scientificName": "Chionoecetes opilio",
+      "nfg:seasonStart": "11-06",
+      "nfg:seasonEnd": "03-20",
+      "nfg:vadCertified": true,
+      "nfg:vadSource": "owner_verified",
+      "nfg:confidenceScore": 0.95
+    }]
+  }
+}</pre></dd>
+    <dt>型</dt><dd class="types"><code>nfg:SeafoodRestaurant</code><code>nfg:CocktailBar</code><code>nfg:KappoRestaurant</code><code>nfg:KaisekiRestaurant</code> <em>v0.3 で追加</em><code>nfg:Dish</code><code>nfg:Ingredient</code></dd>
+    <dt>プロパティ</dt><dd><ul><li><code>nfg:vadCertified</code><span>店主確認済みか（真偽）</span></li><li><code>nfg:vadSource</code><span>確かめた出どころ（下の4つ）</span></li><li><code>nfg:confidenceScore</code><span>確かさ 0.0〜1.0</span></li><li><code>nfg:culturalContext</code><span>海外の方への文化的な背景</span></li><li><code>nfg:cookingMethods</code><span>調理法（複数）</span></li><li><code>nfg:dishCategory</code><span>料理の分類</span></li><li><code>nfg:mainIngredients</code><span>主な材料（複数）</span></li><li><code>nfg:courseFlow</code><span>コースの流れ（順番つき）<em>v0.3 で追加</em></span></li><li><code>nfg:provenance</code><span>産地・仕入れ</span></li><li><code>nfg:scientificName</code><span>学名（魚・蟹など）</span></li><li><code>nfg:habitat</code><span>生息域（例：水深200〜600m）<em>v0.3 で追加</em></span></li><li><code>nfg:certificationTag</code><span>産地や品質の認証の札（例：越前がにの黄色いタグ）<em>v0.3 で追加</em></span></li><li><code>nfg:seasonStart</code><span>旬の始まり（MM-DD）</span></li><li><code>nfg:seasonEnd</code><span>旬の終わり（MM-DD）</span></li></ul></dd>
+    <dt>vadSource の値</dt><dd class="types"><code>ai_inferred</code><code>third_party</code><code>official_published</code><code>owner_verified</code></dd>
+    <dt>版</dt><dd><p>0.x のあいだは、互換性のない変更で 2 桁目を上げます。v0.3 は、実際のサイトで使われていた 4 つの語（KaisekiRestaurant・habitat・courseFlow・certificationTag）を定義に加えた版です。v0.2 も引き続き配信します。</p><p class="note">ライセンス：語彙は CC BY 4.0 を予定（未確定）。</p></dd>
+  </dl>
+</div></section>
 
-<h2>Defined Terms (v0.2)</h2>
-<h3>Types</h3>
-<ul>
-  <li><code>nfg:SeafoodRestaurant</code></li>
-  <li><code>nfg:CocktailBar</code></li>
-  <li><code>nfg:KappoRestaurant</code></li>
-  <li><code>nfg:Dish</code></li>
-  <li><code>nfg:Ingredient</code></li>
-</ul>
-
-<h3>Properties</h3>
-<ul>
-  <li><code>nfg:vadCertified</code> (xsd:boolean) — Verified Authentic Data: owner-confirmed</li>
-  <li><code>nfg:vadSource</code> (xsd:string) — Source of verification (e.g. owner_verified, brand_official)</li>
-  <li><code>nfg:confidenceScore</code> (xsd:decimal, 0.0–1.0) — Data confidence</li>
-  <li><code>nfg:culturalContext</code> (xsd:string) — Cultural / regional context for international audience</li>
-  <li><code>nfg:cookingMethods</code> (set of strings)</li>
-  <li><code>nfg:dishCategory</code></li>
-  <li><code>nfg:mainIngredients</code> (set of strings)</li>
-  <li><code>nfg:provenance</code> — Origin / sourcing info</li>
-  <li><code>nfg:scientificName</code> (e.g. Latin name for fish/crab)</li>
-  <li><code>nfg:seasonStart</code> (xsd:date)</li>
-  <li><code>nfg:seasonEnd</code> (xsd:date)</li>
-</ul>
-
-<h2>Versioning</h2>
-<p>NFG follows semantic versioning. Breaking changes increment minor (e.g. v0.2 → v0.3) during the 0.x phase. v1.0 will be released after community stabilization.</p>
-
-<h2>Provided by</h2>
-<p>株式会社 NGraph (NGraph Inc.) — <a href="https://ngraph.jp/">https://ngraph.jp/</a></p>
-<p>NFG is the data standard powering <a href="https://omiseai.com/">OMISEAI</a> and partner restaurants.</p>
-
+<footer><div class="wrap">策定：<a href="https://ngraph.jp/">株式会社NGraph</a>　｜　<a href="https://omiseai.com/">OMISEAI</a></div></footer>
 </body>
 </html>
