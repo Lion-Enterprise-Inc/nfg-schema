@@ -31,7 +31,7 @@ Embed in your HTML:
 
 ## Deploy
 
-Static site, hosted on Cloudflare Pages. GitHub push → auto deploy.
+NGraph の Cloudflare の Worker `nfg-schema`（静的アセット・nfg.ngraph.jp）。2026-10-26 に LION の Pages から移行。**GitHub に push しても本番には出ない**（自動公開なし）。手順は shingo-brain `projects/github-brand-separation.md` の 2026-10-26 の節。
 
 ## Versioning
 
